@@ -1,55 +1,55 @@
-import { useDispatch, useSelector } from "react-redux";
-import { addContact } from "../../redux/contactsOps";
-import { selectContact } from "../../redux/contactsSlice";
-import css from "./ContactForm.module.css";
-import { useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
+import s from "./ContactForm.module.css";
+import { useDispatch } from "react-redux";
+import { addContact } from "../../redux/contacts/operations";
 
 const ContactForm = () => {
-  const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContact);
+  const initialValues = {
+    name: "",
+    number: "",
+  };
+  const FeedbackSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(3, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+    number: Yup.string()
+      .min(3, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+  });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const newContact = { name, number };
+  const handleSubmit = (values, options) => {
+    const newItem = { name: values.name, number: values.number };
 
-    if (contacts.find((contact) => contact.name === name)) {
-      alert(`${name} is already in contacts.`);
-      return;
-    }
-
-    dispatch(addContact(newContact));
-    setName("");
-    setNumber("");
+    dispatch(addContact(newItem));
+    options.resetForm();
   };
 
   return (
-    <div className={css.div}>
-      <form className={css.form} onSubmit={handleSubmit}>
-        <label className={css.label}>
-          Name
-          <input
-            className={css.input}
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      validationSchema={FeedbackSchema}
+    >
+      <Form className={s.form}>
+        <label htmlFor="name" className={s.label}>
+          Name:
+          <Field type="text" name="name" className={s.input} />
+          <ErrorMessage name="name" component="p" />
         </label>
-        <label className={css.label}>
-          Number
-          <input
-            className={css.input}
-            type="text"
-            value={number}
-            onChange={(e) => setNumber(e.target.value)}
-          />
+
+        <label htmlFor="number" className={s.label}>
+          Number:
+          <Field type="text" name="number" className={s.input} />
+          <ErrorMessage name="number" component="p" />
         </label>
-        <button className={css.btn} type="submit">
-          Add contact
-        </button>
-      </form>
-    </div>
+        <button type="submit">Add Contact</button>
+      </Form>
+    </Formik>
   );
 };
 

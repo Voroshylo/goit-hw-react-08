@@ -1,24 +1,24 @@
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contactsOps";
-import css from "./Contact.module.css";
+import s from "./Contact.module.css";
+import { deleteContact } from "../../redux/contacts/operations";
 
-const Contact = ({ id, name, numer }) => {
+const Contact = ({ contact }) => {
+  const name = contact.name;
+  const number = contact.number;
+  const id = contact.id;
   const dispatch = useDispatch();
-
   return (
-    <div className={css.div}>
-      <ul className={css.ul}>
-        <li className={css.li}>
-          {name}: {numer}
-          <button
-            className={css.btn}
-            onClick={() => dispatch(deleteContact(id))}
-          >
-            Delete
-          </button>
-        </li>
-      </ul>
-    </div>
+    <li className={s.contact}>
+      <p className="title">{name}</p>
+      <p className="telefon">{number}</p>
+      <button
+        type="button"
+        className="button"
+        onClick={() => dispatch(deleteContact(id))}
+      >
+        Delete
+      </button>
+    </li>
   );
 };
 
