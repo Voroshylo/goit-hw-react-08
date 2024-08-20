@@ -54,7 +54,10 @@ const RegistrationPage = () => {
             <button className={css.btn} type="submit">
               Register
             </button>
-            <Link to="/login"> Already have an account? Log in</Link>
+            <Link className={css.link} to="/login">
+              {" "}
+              Already have an account? Log in
+            </Link>
           </Form>
         </Formik>
       </div>

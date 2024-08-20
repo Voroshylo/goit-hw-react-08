@@ -11,8 +11,9 @@ const UserMenu = () => {
   const isLogin = useSelector(selectIsLoggedIn);
   return (
     <div className={css.div}>
-      <p>Welcome {username}</p>
+      <p className={css.welcome}>Welcome {username}</p>
       <Link
+        className={css.link}
         to="/login"
         onClick={() => {
           dispatch(logOut());

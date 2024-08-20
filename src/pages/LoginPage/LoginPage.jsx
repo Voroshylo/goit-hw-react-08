@@ -19,7 +19,7 @@ const LoginPage = () => {
   return (
     <>
       <div className={css.div}>
-        <h2 className={css.title}>LOGIN PAGE</h2>
+        <h2 className={css.title}>LOGIN</h2>
         <Formik
           initialValues={{ email: "", password: "" }}
           onSubmit={(values) => {
@@ -49,7 +49,10 @@ const LoginPage = () => {
             <button className={css.btn} type="submit">
               Log In
             </button>
-            <Link to="/register"> Do not have an account? Register here</Link>
+            <Link className={css.link} to="/register">
+              {" "}
+              Do not have an account? Register here
+            </Link>
           </Form>
         </Formik>
       </div>
