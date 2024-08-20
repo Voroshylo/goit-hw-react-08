@@ -1,7 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-import s from "./ContactForm.module.css";
+import css from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
 
@@ -35,19 +35,21 @@ const ContactForm = () => {
       onSubmit={handleSubmit}
       validationSchema={FeedbackSchema}
     >
-      <Form className={s.form}>
-        <label htmlFor="name" className={s.label}>
+      <Form className={css.form}>
+        <label htmlFor="name" className={css.label}>
           Name:
-          <Field type="text" name="name" className={s.input} />
-          <ErrorMessage name="name" component="p" />
+          <Field type="text" name="name" className={css.input} />
+          <ErrorMessage className={css.error} name="name" component="p" />
         </label>
 
-        <label htmlFor="number" className={s.label}>
+        <label htmlFor="number" className={css.label}>
           Number:
-          <Field type="text" name="number" className={s.input} />
-          <ErrorMessage name="number" component="p" />
+          <Field type="text" name="number" className={css.input} />
+          <ErrorMessage className={css.error} name="number" component="p" />
         </label>
-        <button type="submit">Add Contact</button>
+        <button className={css.btn} type="submit">
+          Add Contact
+        </button>
       </Form>
     </Formik>
   );

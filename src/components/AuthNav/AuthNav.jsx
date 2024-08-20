@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
-import s from "./AuthNav.module.css";
+import css from "./AuthNav.module.css";
 
 const AuthNav = () => {
   return (
-    <div className={s.cont}>
+    <div className={css.div}>
       <NavLink
         to="/register"
-        className={s.link}
+        className={css.link}
         style={({ isActive }) => {
           return isActive ? { color: "green" } : {};
         }}
@@ -15,7 +15,7 @@ const AuthNav = () => {
       </NavLink>
       <NavLink
         to="/login"
-        className={s.link}
+        className={css.link}
         style={({ isActive }) => {
           return isActive ? { color: "green" } : {};
         }}

@@ -1,6 +1,5 @@
 import { Field, Form, Formik } from "formik";
-import s from "./LoginPage.module.css";
-import { FormLabel } from "@mui/material";
+import css from "./LoginPage.module.css";
 import { logIn } from "../../redux/auth/operations";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -19,36 +18,38 @@ const LoginPage = () => {
 
   return (
     <>
-      <div className={s.bg}>
-        <h2 className={s.title}>LOGIN PAGE</h2>
+      <div className={css.div}>
+        <h2 className={css.title}>LOGIN PAGE</h2>
         <Formik
           initialValues={{ email: "", password: "" }}
           onSubmit={(values) => {
             dispatch(logIn(values));
           }}
         >
-          <Form className={s.form}>
-            <FormLabel for="email" className={s.label}>
+          <Form className={css.form}>
+            <label htmlFor="email" className={css.label}>
               Email
               <Field
                 name="email"
                 type="email"
                 placeholder="Please enter your email"
-                className={s.input}
-              ></Field>
-            </FormLabel>
+                className={css.input}
+              />
+            </label>
 
-            <FormLabel for="password" className={s.label}>
+            <label htmlFor="password" className={css.label}>
               Password
               <Field
                 name="password"
                 type="password"
                 placeholder="Please enter your password"
-                className={s.input}
-              ></Field>
-            </FormLabel>
-            <button type="submit">Log In</button>
-            <Link to="/register"> Do not have account, please register</Link>
+                className={css.input}
+              />
+            </label>
+            <button className={css.btn} type="submit">
+              Log In
+            </button>
+            <Link to="/register"> Do not have an account? Register here</Link>
           </Form>
         </Formik>
       </div>

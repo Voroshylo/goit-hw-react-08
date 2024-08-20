@@ -1,7 +1,8 @@
-.divHeader {
+.header {
   display: flex;
   flex-direction: row;
   gap: 20px;
   align-items: baseline;
   margin: 0 auto;
+  background-color: bisque;
 }
